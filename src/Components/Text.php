@@ -1,4 +1,5 @@
 <?php
+
 namespace SageUiKits\Components;
 
 use Illuminate\View\Component;

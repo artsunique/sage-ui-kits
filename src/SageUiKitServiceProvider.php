@@ -10,7 +10,6 @@ class SageUiKitServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'sage-ui');
-
-        Blade::componentNamespace('SageUiKits\\Components', 'sage-ui');
+        Blade::componentNamespace('SageUiKits\\Components', '');
     }
 }
