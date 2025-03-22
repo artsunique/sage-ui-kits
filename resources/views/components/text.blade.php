@@ -1,3 +1,3 @@
-<x-text class="text-blue-600">
-    Funktioniert – direkt aus dem Composer-Package 🙌
-</x-text>
+<p {{ $attributes->merge(['class' => 'text-base text-gray-700 leading-relaxed']) }}>
+    {{ $slot }}
+</p>
