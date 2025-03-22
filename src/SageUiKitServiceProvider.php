@@ -11,6 +11,9 @@ class SageUiKitServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'sage-ui');
 
-        Blade::component('SageUiKits\\Components\\Text', 'text');
+        Blade::components([
+            'text' => \SageUiKits\Components\Text::class,
+            'date' => \SageUiKits\Components\Date::class,
+        ]);
     }
 }
