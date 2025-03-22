@@ -15,6 +15,7 @@ class SageUiKitServiceProvider extends ServiceProvider
             'text' => \SageUiKits\Components\Text::class,
             'date' => \SageUiKits\Components\Date::class,
             'copyright' => \SageUiKits\Components\Copyright::class,
+            'link' => \SageUiKits\Components\Link::class,
         ]);
     }
 }
