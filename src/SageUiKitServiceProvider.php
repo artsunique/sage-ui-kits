@@ -9,10 +9,10 @@ class SageUiKitServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        // Namespace für Views
+        // Lade Views mit Namespace 'sage-ui'
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'sage-ui');
 
-        // Blade-Komponenten registrieren
+        // Registriere Blade-Komponenten
         Blade::component('SageUiKits\\Components\\Text', 'text');
         Blade::component('SageUiKits\\Components\\Date', 'date');
         Blade::component('SageUiKits\\Components\\Link', 'link');
@@ -24,16 +24,16 @@ class SageUiKitServiceProvider extends ServiceProvider
             __DIR__.'/../resources/views' => resource_path('views/vendor/sage-ui'),
         ], 'sage-ui-kits');
 
-        // JS-Dateien publishable
+        // JS publishable
         $this->publishes([
             __DIR__.'/../resources/js' => resource_path('scripts/vendor/sage-ui'),
         ], 'sage-ui-kits-js');
 
-        // Autokopie von README.md und progress.mjs ins Theme
+        // Automatisches Kopieren zusätzlicher Dateien ins Theme
         if (function_exists('get_template') && function_exists('get_theme_root')) {
             $themeDir = get_theme_root() . '/' . get_template();
 
-            // README automatisch kopieren
+            // 1. README kopieren
             $readmeSource = __DIR__ . '/../SAGE-UI.md';
             $readmeTarget = $themeDir . '/sage-ui-readme.md';
 
@@ -41,36 +41,51 @@ class SageUiKitServiceProvider extends ServiceProvider
                 @copy($readmeSource, $readmeTarget);
             }
 
-            // progress.mjs automatisch kopieren
-            // progress.mjs automatisch in components/ kopieren und app.js anpassen
+            // 2. progress.mjs kopieren + app.js anpassen
             $jsSource = __DIR__ . '/../resources/js/progress.mjs';
             $componentDir = $themeDir . '/resources/scripts/components';
             $jsTarget = $componentDir . '/progress.mjs';
 
-            if (file_exists($jsSource) && !file_exists($jsTarget)) {
-                @mkdir($componentDir, 0777, true);
-                @copy($jsSource, $jsTarget);
+            if (file_exists($jsSource)) {
+                if (!is_dir($componentDir)) {
+                    @mkdir($componentDir, 0777, true);
+                }
+
+                if (!file_exists($jsTarget)) {
+                    @copy($jsSource, $jsTarget);
+                }
 
                 // app.js erweitern
                 $appJsPath = $themeDir . '/resources/scripts/app.js';
-                if (file_exists($appJsPath)) {
-                    $appJs = file_get_contents($appJsPath);
 
-                    $importStatement = "import { ProgressBar } from './components/progress.mjs';";
-                    $callStatement = "ProgressBar();";
-
-                    // nur einfügen, wenn nicht schon vorhanden
-                    if (!str_contains($appJs, $importStatement)) {
-                        $appJs = $importStatement . "\n" . $appJs;
-                    }
-
-                    if (!str_contains($appJs, $callStatement)) {
-                        $appJs .= "\n\n" . $callStatement . "\n";
-                    }
-
-                    file_put_contents($appJsPath, $appJs);
+                // Ordner anlegen, falls nicht vorhanden
+                if (!is_dir(dirname($appJsPath))) {
+                    @mkdir(dirname($appJsPath), 0777, true);
                 }
+
+                // Datei anlegen, wenn sie fehlt
+                if (!file_exists($appJsPath)) {
+                    file_put_contents($appJsPath, "// Sage UI app.js\n");
+                }
+
+                // Import + Aufruf einfügen, falls nicht vorhanden
+                $appJs = file_get_contents($appJsPath);
+                $importStatement = "import { ProgressBar } from './components/progress.mjs';";
+                $callStatement = "ProgressBar();";
+
+                if (!str_contains($appJs, $importStatement)) {
+                    $appJs = $importStatement . "\n" . $appJs;
+                }
+
+                if (!str_contains($appJs, $callStatement)) {
+                    $appJs .= "\n\n" . $callStatement . "\n";
+                }
+
+                file_put_contents($appJsPath, $appJs);
             }
         }
+
+        // Debug (optional)
+        // \Illuminate\Support\Facades\Log::info('✅ SageUiKitServiceProvider booted');
     }
 }
