@@ -1,11 +1,16 @@
 <?php
-use SageUiKits\SageUiKitServiceProvider;
 
-class ThemeServiceProvider extends SageServiceProvider
+namespace SageUiKits;
+
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Blade;
+
+class SageUiKitServiceProvider extends ServiceProvider
 {
-    public function register()
+    public function boot()
     {
-        parent::register();
-        $this->app->register(SageUiKitServiceProvider::class);
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'sage-ui');
+
+        Blade::component('SageUiKits\\Components\\Text', 'text');
     }
 }
