@@ -8,7 +8,7 @@ class Text extends Component
 public function render()
 {
 return function (array $data) {
-return view('components.text', $data)->render();
+return view('sage-ui::components.text', $data)->render();
 };
 }
 }
