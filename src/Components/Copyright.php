@@ -9,7 +9,7 @@ class Copyright extends Component
     public function render()
     {
         return function (array $data) {
-            return view('sage-ui::components.copyright', $data)->render();
+            return view('components.copyright', $data)->render();
         };
     }
 }
