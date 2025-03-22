@@ -42,12 +42,34 @@ class SageUiKitServiceProvider extends ServiceProvider
             }
 
             // progress.mjs automatisch kopieren
+            // progress.mjs automatisch in components/ kopieren und app.js anpassen
             $jsSource = __DIR__ . '/../resources/js/progress.mjs';
-            $jsTarget = $themeDir . '/resources/scripts/vendor/sage-ui/progress.mjs';
+            $componentDir = $themeDir . '/resources/scripts/components';
+            $jsTarget = $componentDir . '/progress.mjs';
 
             if (file_exists($jsSource) && !file_exists($jsTarget)) {
-                @mkdir(dirname($jsTarget), 0777, true);
+                @mkdir($componentDir, 0777, true);
                 @copy($jsSource, $jsTarget);
+
+                // app.js erweitern
+                $appJsPath = $themeDir . '/resources/scripts/app.js';
+                if (file_exists($appJsPath)) {
+                    $appJs = file_get_contents($appJsPath);
+
+                    $importStatement = "import { ProgressBar } from './components/progress.mjs';";
+                    $callStatement = "ProgressBar();";
+
+                    // nur einfügen, wenn nicht schon vorhanden
+                    if (!str_contains($appJs, $importStatement)) {
+                        $appJs = $importStatement . "\n" . $appJs;
+                    }
+
+                    if (!str_contains($appJs, $callStatement)) {
+                        $appJs .= "\n\n" . $callStatement . "\n";
+                    }
+
+                    file_put_contents($appJsPath, $appJs);
+                }
             }
         }
     }
