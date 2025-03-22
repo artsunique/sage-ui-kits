@@ -89,7 +89,6 @@ $this->publishes([
     __DIR__.'/../path/to/assets' => public_path('vendor/sage-ui-kits'),
 ], 'sage-ui-kits');
 ````
-📚 Usage
-Components
-The following components are available in this package:
+📚 Publish in Sage Theme:
+wp acorn vendor:publish --tag=sage-ui-kits
 
