@@ -14,7 +14,7 @@ class SageUiKitServiceProvider extends ServiceProvider
         Blade::component('SageUiKits\\Components\\Text', 'text');
         Blade::component('SageUiKits\\Components\\Date', 'date');
         Blade::component('SageUiKits\\Components\\Link', 'link');
-        Blade::component('SageUiKits\\Components\\Copyright', 'link');
+        Blade::component('SageUiKits\\Components\\Copyright', 'copyright');
 
         // Optional: Make resources publishable
         $this->publishes([
