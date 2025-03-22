@@ -26,8 +26,8 @@ class SageUiKitServiceProvider extends ServiceProvider
 
         // JS-Dateien publishable
         $this->publishes([
-            __DIR__.'/../resources/js' => resource_path('scripts/vendor/sage-ui'),
-        ], 'sage-ui-kits-js');
+            __DIR__.'/../resources/scripts' => resource_path('scripts/vendor/sage-ui'),
+        ], 'sage-ui-kits-scripts');
 
         // Autokopie von README.md und progress.mjs ins Theme
         if (function_exists('get_template') && function_exists('get_theme_root')) {
