@@ -1,18 +1,11 @@
 <?php
+use SageUiKits\SageUiKitServiceProvider;
 
-namespace SageUiKits;
-
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Blade;
-
-class SageUiKitServiceProvider extends ServiceProvider
+class ThemeServiceProvider extends SageServiceProvider
 {
-    public function boot()
+    public function register()
     {
-        // Views registrieren – wichtig für render() view()
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'sage-ui');
-
-        // Ohne Prefix: <x-text>
-        Blade::component('SageUiKits\\Components\\Text', 'text');
+        parent::register();
+        $this->app->register(SageUiKitServiceProvider::class);
     }
 }
