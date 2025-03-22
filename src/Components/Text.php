@@ -8,7 +8,8 @@ class Text extends Component
 {
     public function render()
     {
-        // Der Namespace muss mit loadViewsFrom übereinstimmen
-        return view('sage-ui::components.text');
+        return function (array $data) {
+            return view('sage-ui::components.text', $data)->render();
+        };
     }
 }
