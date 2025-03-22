@@ -25,7 +25,7 @@ class SageUiKitServiceProvider extends ServiceProvider
 
         // Automatisches Kopieren von README.md ins aktuelle Theme-Verzeichnis (nur wenn nicht vorhanden)
         if (function_exists('get_template') && function_exists('get_theme_root')) {
-            $readmeSource = __DIR__ . '/../README.md';
+            $readmeSource = __DIR__ . '/../SAGE-UI.md';
             $themeDir = get_theme_root() . '/' . get_template();
             $readmeTarget = $themeDir . '/sage-ui-readme.md';
 
