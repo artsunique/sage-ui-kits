@@ -24,6 +24,10 @@ class SageUiKitServiceProvider extends ServiceProvider
             __DIR__.'/../resources/views' => resource_path('views/vendor/sage-ui'),
         ], 'sage-ui-kits');
 
+        $this->publishes([
+            __DIR__.'/../resources/js' => resource_path('scripts/vendor/sage-ui'),
+        ], 'sage-ui-kits-js');
+
         // Automatisches Kopieren von README.md ins aktuelle Theme-Verzeichnis (nur wenn nicht vorhanden)
         if (function_exists('get_template') && function_exists('get_theme_root')) {
             $readmeSource = __DIR__ . '/../SAGE-UI.md';
