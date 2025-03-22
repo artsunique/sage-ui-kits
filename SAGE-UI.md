@@ -36,8 +36,8 @@ Renders a semantic `<a>` element with microdata, accessibility, and fallback slo
 `<x-link url="https://example.com" title="Example">Visit site</x-link>`
 
 **With custom aria label and target:**  
-`<x-link url="https://example.com" title="External" target="_blank" aria="Go to external site" />
-`
+`<x-link url="https://example.com" title="External" target="_blank" aria="Go to external site" />`
+
 **Props:**
 - _url_ → required (default: "#")
 - _title_ → optional (used as fallback for slot)
