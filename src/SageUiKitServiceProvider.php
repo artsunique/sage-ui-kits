@@ -14,6 +14,7 @@ class SageUiKitServiceProvider extends ServiceProvider
         Blade::components([
             'text' => \SageUiKits\Components\Text::class,
             'date' => \SageUiKits\Components\Date::class,
+            'copyright' => \SageUiKits\Components\Copyright::class,
         ]);
     }
 }
