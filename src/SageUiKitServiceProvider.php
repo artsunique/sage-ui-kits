@@ -11,13 +11,11 @@ class SageUiKitServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'sage-ui');
 
-        Blade::component('SageUiKits\\Components\\Text', 'text');
-        Blade::component('SageUiKits\\Components\\Date', 'date');
-        Blade::component('SageUiKits\\Components\\Link', 'link');
-
-        // Optional: Make resources publishable
-        $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/sage-ui-kits'),
-        ], 'sage-ui-kits');
+        Blade::components([
+            'text' => \SageUiKits\Components\Text::class,
+            'date' => \SageUiKits\Components\Date::class,
+            'copyright' => \SageUiKits\Components\Copyright::class,
+            'link' => \SageUiKits\Components\Link::class,
+        ]);
     }
 }
