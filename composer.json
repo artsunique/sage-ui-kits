@@ -1,5 +1,5 @@
 {
-  "name": "paul/sage-ui-kits",
+  "name": "artsunique/sage-ui-kits",
   "description": "Wiederverwendbare Blade-Komponenten für Sage WordPress Themes",
   "type": "library",
   "autoload": {
