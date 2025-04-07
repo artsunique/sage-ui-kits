@@ -49,4 +49,4 @@ Renders a semantic `<a>` element with microdata, accessibility, and fallback slo
 ### x-wrapper Component
 This Blade component renders a <div> element with customizable vertical margin. By default, it applies my-0. It also merges additional classes passed via $attributes.
 
-`<x-margin-div margin="my-4" />`
+`<x-wrapper height="my-4" />`
