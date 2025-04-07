@@ -9,7 +9,7 @@ class SageUiKitServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        // Namespace für Views
+        // Blade-View-Namespace
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'sage-ui');
 
         // Blade-Komponenten registrieren
@@ -30,27 +30,41 @@ class SageUiKitServiceProvider extends ServiceProvider
 
         // JS-Dateien publishable
         $this->publishes([
-            __DIR__.'/../resources/scripts' => resource_path('scripts/vendor/sage-ui'),
+            __DIR__.'/../resources/js' => resource_path('scripts/vendor/sage-ui'),
         ], 'sage-ui-kits-scripts');
 
-        // Autokopie von README.md und progress.mjs ins Theme
+        // Automatischer Kopiervorgang bei Theme-Aktivierung
         if (function_exists('get_template') && function_exists('get_theme_root')) {
             $themeDir = get_theme_root() . '/' . get_template();
 
-            // README automatisch kopieren
-            $readmeSource = __DIR__ . '/../SAGE-UI.md';
-            $readmeTarget = $themeDir . '/sage-ui-readme.md';
-
-            if (file_exists($readmeSource) && !file_exists($readmeTarget)) {
-                @copy($readmeSource, $readmeTarget);
-            }
-
-            $jsSource = __DIR__ . '/../resources/js/progress.mjs';
-            $jsTarget = $themeDir . '/resources/scripts/vendor/sage-ui/progress.mjs';
+            $this->registerAssets([
+                __DIR__ . '/../SAGE-UI.md'                       => $themeDir . '/sage-ui-readme.md',
+                __DIR__ . '/../resources/js/progress.mjs'        => $themeDir . '/resources/scripts/vendor/sage-ui/progress.mjs',
+                __DIR__ . '/../resources/js/darkmode.mjs'        => $themeDir . '/resources/scripts/vendor/sage-ui/darkmode.mjs',
+            ]);
         }
-            if (file_exists($jsSource) && !file_exists($jsTarget)) {
-                @mkdir(dirname($jsTarget), 0777, true);
-                @copy($jsSource, $jsTarget);
-            }
+    }
+
+    /**
+     * Kopiert mehrere Assets bei Bedarf
+     *
+     * @param array $assets [quelle => ziel]
+     */
+    protected function registerAssets(array $assets): void
+    {
+        foreach ($assets as $source => $target) {
+            $this->copyAssetIfNotExists($source, $target);
+        }
+    }
+
+    /**
+     * Kopiert eine Datei, wenn Ziel nicht existiert
+     */
+    protected function copyAssetIfNotExists(string $source, string $target): void
+    {
+        if (file_exists($source) && !file_exists($target)) {
+            @mkdir(dirname($target), 0777, true);
+            @copy($source, $target);
+        }
     }
 }
