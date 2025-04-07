@@ -20,7 +20,7 @@ class SageUiKitServiceProvider extends ServiceProvider
         Blade::component('SageUiKits\\Components\\Progress', 'progress');
         Blade::component('SageUiKits\\Components\\Wrapper', 'wrapper');
         Blade::component('SageUiKits\\Components\\Menu', 'menu');
-
+        Blade::component('SageUiKits\\Components\\Excerpt', 'excerpt');
         // Views publishable
         $this->publishes([
             __DIR__.'/../resources/views' => resource_path('views/vendor/sage-ui'),

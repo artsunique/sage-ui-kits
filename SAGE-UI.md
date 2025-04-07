@@ -50,3 +50,10 @@ Renders a semantic `<a>` element with microdata, accessibility, and fallback slo
 This Blade component renders a <div> element with customizable vertical margin. By default, it applies my-0. It also merges additional classes passed via $attributes.
 
 `<x-wrapper height="my-4" />`
+
+### x-menu Component
+This Blade component renders WordPress Menus
+`<x-menu InnerClass="my-4" />`
+
+### x-excerpt Component
+
