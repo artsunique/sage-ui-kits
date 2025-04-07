@@ -1,14 +1,3 @@
-<?php
-/*
-|-------------------------------------------------------------------------------------------------------------------
-| Menu Component View
-| Author: Arts Unique
-| Attributes / Props: menu, innerClass
-| Example usage: <x-menu menu="primary_navigation" InnerClass="custom-class">Menu Content</x-menu>
-|-------------------------------------------------------------------------------------------------------------------
-*/
-?>
-
 @props([
   'menu' => 'null',
   'InnerClass' => 'flex',
