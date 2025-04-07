@@ -18,6 +18,7 @@ class SageUiKitServiceProvider extends ServiceProvider
         Blade::component('SageUiKits\\Components\\Link', 'link');
         Blade::component('SageUiKits\\Components\\Copyright', 'copyright');
         Blade::component('SageUiKits\\Components\\Progress', 'progress');
+        Blade::component('SageUiKits\\Components\\Wrapper', 'progress');
 
         // Views publishable
         $this->publishes([
