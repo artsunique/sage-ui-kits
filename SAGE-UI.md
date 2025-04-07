@@ -1,59 +1,18 @@
-### x-copyright Component
-Displays a semantic copyright notice.
+<div x-data="{ dark: localStorage.getItem('theme') === 'dark' }" x-init="
+    if (dark) document.documentElement.classList.add('dark');
+" class="inline-flex items-center gap-2">
 
-**Basic usage:**  
-`<x-copyright />`
-
-**With custom owner:**  
-`<x-copyright Owner="My Awesome Company" />`
-
-**With custom class:**  
-`<x-copyright class="text-sm text-gray-500 justify-center" />
-`
-**Props:**
-- _Owner_ → Default: "Arts Unique"
-- _Designer_ → Default: "Arts Unique" (currently unused)
-----
-### x-date Component
-Outputs a semantic <time> element for the current post, with microdata for SEO.
-
-**Basic usage:**  
-<`x-date />`
-
-**With custom class:**  
-`<x-date class="text-sm text-gray-500" />`
-
-**Props:**  
-(none – relies on WordPress's get_post_time function for current post date)
-----
-### x-link Component
-Renders a semantic `<a>` element with microdata, accessibility, and fallback slot/title handling.
-
-**Basic usage:**  
-`<x-link url="https://example.com" title="Example" />`
-
-**With slot content:**  
-`<x-link url="https://example.com" title="Example">Visit site</x-link>`
-
-**With custom aria label and target:**  
-`<x-link url="https://example.com" title="External" target="_blank" aria="Go to external site" />`
-
-**Props:**
-- _url_ → required (default: "#")
-- _title_ → optional (used as fallback for slot)
-- _aria_ → optional (default: "Link {title}")
-- _target_ → default: "_self"
-- _rel_ → default: "noopener noreferrer"
-----
-
-### x-wrapper Component
-This Blade component renders a <div> element with customizable vertical margin. By default, it applies my-0. It also merges additional classes passed via $attributes.
-
-`<x-wrapper height="my-4" />`
-
-### x-menu Component
-This Blade component renders WordPress Menus
-`<x-menu InnerClass="my-4" />`
-
-### x-excerpt Component
-
+<button
+@click="
+dark = !dark;
+localStorage.setItem('theme', dark ? 'dark' : 'light');
+document.documentElement.classList.toggle('dark', dark);
+"
+class="rounded-full p-2 border text-sm"
+:class="dark ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-900'"
+aria-label="Toggle Dark Mode"
+>
+    <svg x-show="!dark" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" stroke="currentColor"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+    <svg x-show="dark" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/></svg>
+  </button>
+</div>
