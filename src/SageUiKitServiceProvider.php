@@ -26,6 +26,7 @@ class SageUiKitServiceProvider extends ServiceProvider
         Blade::component('SageUiKits\\Components\\Main', 'main');
         Blade::component('SageUiKits\\Components\\Article', 'article');
         Blade::component('SageUiKits\\Components\\Section', 'section');
+        Blade::component('SageUiKits\\Components\\Heading', 'heading');
 
         // Views publishable
         $this->publishes([
