@@ -1,3 +1,1 @@
-<main id="main" role="main" itemscope itemprop="mainContentOfPage">
-    {{ $slot }}
-</main>
+<main id="main" role="main" itemscope itemprop="mainContentOfPage">{{ $slot }}</main>
