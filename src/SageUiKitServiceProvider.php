@@ -23,6 +23,9 @@ class SageUiKitServiceProvider extends ServiceProvider
         Blade::component('SageUiKits\\Components\\Excerpt', 'excerpt');
         Blade::component('SageUiKits\\Components\\Darkmode', 'darkmode');
         Blade::component('SageUiKits\\Components\\Skip', 'skip-to-content');
+        Blade::component('SageUiKits\\Components\\Main', 'main');
+        Blade::component('SageUiKits\\Components\\Article', 'article');
+        Blade::component('SageUiKits\\Components\\Section', 'section');
 
         // Views publishable
         $this->publishes([
